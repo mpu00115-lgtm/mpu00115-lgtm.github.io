@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 배포 후 example.com 을 실제 도메인으로 일괄 치환하세요. 페이지 추가 시 <url> 항목을 늘립니다. -->
+<!-- 배포 후 mpu00115-lgtm.github.io 을 실제 도메인으로 일괄 치환하세요. 페이지 추가 시 <url> 항목을 늘립니다. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://example.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://example.com/calculators/mortgage-calculator.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://example.com/guides/how-to-lower-mortgage-payment.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://example.com/about</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
-  <url><loc>https://example.com/contact</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
-  <url><loc>https://example.com/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://example.com/terms</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://mpu00115-lgtm.github.io/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://mpu00115-lgtm.github.io/calculators/mortgage-calculator.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://mpu00115-lgtm.github.io/calculators/auto-loan-calculator.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://mpu00115-lgtm.github.io/calculators/paycheck-calculator.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://mpu00115-lgtm.github.io/calculators/credit-card-payoff-calculator.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://mpu00115-lgtm.github.io/calculators/retirement-savings-calculator.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://mpu00115-lgtm.github.io/glossary.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mpu00115-lgtm.github.io/guides/index.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://mpu00115-lgtm.github.io/guides/how-to-lower-mortgage-payment.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mpu00115-lgtm.github.io/guides/fixed-vs-adjustable-rate-mortgage.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mpu00115-lgtm.github.io/guides/how-much-house-can-i-afford.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mpu00115-lgtm.github.io/about.html</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://mpu00115-lgtm.github.io/contact.html</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://mpu00115-lgtm.github.io/privacy.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://mpu00115-lgtm.github.io/terms.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>

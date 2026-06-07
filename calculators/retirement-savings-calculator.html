@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retirement Savings Calculator: Project Your Nest Egg (2026) — Free</title>
+<meta name="description" content="Free retirement savings calculator. Enter your age, current savings, monthly contribution, and expected return to project your nest egg with a growth chart.">
+<link rel="canonical" href="https://mpu00115-lgtm.github.io/calculators/retirement-savings-calculator.html">
+<link rel="stylesheet" href="/assets/site.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+ {"@type":"Question","name":"How much will my retirement savings grow?","acceptedAnswer":{"@type":"Answer","text":"Growth depends on your starting balance, monthly contributions, the annual return, and years until retirement. Compounding means most of the final balance often comes from growth, not contributions."}},
+ {"@type":"Question","name":"What return should I assume for retirement?","acceptedAnswer":{"@type":"Answer","text":"A common long-term assumption is 6-7% annually for a diversified stock-heavy portfolio before inflation, but returns vary and are never guaranteed."}}
+]}
+</script>
+<style>
+  *{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--pf-ink);line-height:1.7;background:var(--pf-bg)}
+  header{background:var(--pf-blue);color:#fff;padding:12px 16px}header .bar{max-width:760px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+  header a{color:#fff;text-decoration:none;font-size:.9rem;margin-left:14px}.logo{font-weight:800}
+  .wrap{max-width:760px;margin:0 auto;padding:14px 16px 60px}
+  h1{font-size:1.7rem;margin:.2em 0 .1em}.sub{color:var(--pf-muted);margin:0 0 18px}h2{font-size:1.25rem;margin:1.6em 0 .3em}
+  .card{background:var(--pf-surface);border:1px solid var(--pf-line);border-radius:14px;padding:20px;margin:18px 0}
+  label{display:block;font-weight:600;font-size:.92rem;margin:10px 0 4px}
+  input{width:100%;padding:11px 12px;border:1px solid #cfcfd8;border-radius:9px;font-size:1rem;background:#fff;color:inherit}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  button{margin-top:16px;width:100%;background:var(--pf-blue);color:#fff;border:0;border-radius:10px;padding:14px;font-size:1.05rem;font-weight:700;cursor:pointer}
+  .result{display:none;margin-top:18px}.big{font-size:2.1rem;font-weight:800;color:var(--pf-blue)}
+  .row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--pf-line)}
+  canvas{width:100%;height:200px;margin-top:16px;display:block}
+  .ad{margin:22px 0;min-height:90px;background:#fafafe;border:1px dashed #c9c9d6;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#9a9ab0;font-size:.8rem}
+  .faq dt{font-weight:700;margin-top:14px}.disc{font-size:.8rem;color:var(--pf-muted);border-top:1px solid var(--pf-line);margin-top:30px;padding-top:14px}a{color:var(--pf-blue)}
+  footer{background:var(--pf-foot);color:#c8c8d4;padding:24px 16px;margin-top:40px}footer .f{max-width:760px;margin:0 auto}footer a{color:#c8c8d4;margin-right:16px;text-decoration:none;font-size:.88rem}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="bar"><span class="logo">PlainFigures</span><nav><a href="/">Home</a><a href="/guides/index.html">Guides</a><a href="/about.html">About</a></nav></div></header>
+<div class="wrap">
+  <p class="pf-crumb"><a href="/">Home</a> › <a href="/#calculators">Calculators</a> › Retirement Savings</p>
+  <h1>Retirement Savings Calculator</h1>
+  <p class="sub">Project your nest egg and see how much of it comes from growth, not just contributions.</p>
+  <div class="ad">[ AdSense — Above the fold ]</div>
+  <div class="card">
+    <div class="grid">
+      <div><label for="age">Current age</label><input id="age" type="number" value="30"></div>
+      <div><label for="retage">Retirement age</label><input id="retage" type="number" value="65"></div>
+      <div><label for="current">Current savings ($)</label><input id="current" type="number" value="20000"></div>
+      <div><label for="monthly">Monthly contribution ($)</label><input id="monthly" type="number" value="500"></div>
+      <div><label for="ret">Annual return (%)</label><input id="ret" type="number" step="0.1" value="7"></div>
+    </div>
+    <button onclick="calc()">Project my savings</button>
+    <div id="result" class="result">
+      <p style="margin:.4em 0 0">Projected balance at retirement</p>
+      <div class="big" id="bal">$0</div>
+      <div class="row"><span>Total contributions</span><b id="contrib">$0</b></div>
+      <div class="row"><span>Total investment growth</span><b id="growth">$0</b></div>
+      <div class="row"><span>Years invested</span><b id="yrs">0</b></div>
+      <canvas id="chart" width="700" height="200"></canvas>
+      <div class="pf-actions">
+        <button type="button" onclick="pfPrint()">🖨 Print / Save PDF</button>
+        <button type="button" onclick="pfShare()">🔗 Share result</button>
+      </div>
+      <div class="pf-copied">Link copied to clipboard ✓</div>
+    </div>
+  </div>
+  <div class="ad">[ AdSense — In-content ]</div>
+  <h2>How this retirement calculator works</h2>
+  <p>Each year, your balance earns the expected return, and your monthly contributions are added on top. Over decades, the returns themselves start earning returns — this is <strong>compounding</strong>, and it's why the green "growth" portion of the chart eventually dwarfs what you actually contributed. The earlier you start, the more years compounding has to work, which is why a 25-year-old saving modestly often ends up ahead of a 40-year-old saving aggressively.</p>
+  <p>The chart shows your projected balance year by year. Notice how the curve bends upward rather than rising in a straight line — that acceleration is compounding. Try changing the <strong>annual return</strong> or <strong>monthly contribution</strong> and watch how dramatically small differences widen over 30+ years. A single percentage point of return can mean six figures by retirement.</p>
+  <h2>Important assumptions</h2>
+  <p>This projection assumes a steady annual return, which real markets never deliver — actual returns swing year to year, and a major downturn near retirement matters more than the average suggests. It also ignores inflation (a dollar at 65 buys less than today), taxes, and fees. Treat the result as a planning estimate to compare scenarios, not a promise. For context on the math, see our <a href="/guides/index.html">guides</a>.</p>
+  <h2>Frequently asked questions</h2>
+  <dl class="faq">
+    <dt>How much will my retirement savings grow?</dt>
+    <dd>It depends on your starting balance, contributions, return, and years invested. Compounding means most of the final balance often comes from growth.</dd>
+    <dt>What return should I assume?</dt>
+    <dd>A common long-term assumption is 6–7% before inflation for a diversified, stock-heavy portfolio — but returns vary and are never guaranteed.</dd>
+  </dl>
+  <p class="disc"><strong>Disclaimer:</strong> Estimates for educational purposes only, not investment advice. Assumes a constant return and ignores inflation, taxes, and fees. Investing involves risk, including loss of principal.</p>
+  <div id="pf-related"></div>
+</div>
+<footer><div class="f"><nav><a href="/about.html">About</a><a href="/contact.html">Contact</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></nav><p style="font-size:.8rem;color:#8a8a98;margin-top:12px">© 2026 PlainFigures. Estimates only; not financial advice.</p></div></footer>
+<script src="/assets/site.js"></script>
+<script>
+function fmt(n){return '$'+Math.round(n).toLocaleString('en-US');}
+var series=[];
+function calc(){
+  var age=+document.getElementById('age').value,
+      retage=+document.getElementById('retage').value,
+      cur=+document.getElementById('current').value||0,
+      m=+document.getElementById('monthly').value||0,
+      r=(+document.getElementById('ret').value||0)/100;
+  var years=retage-age;
+  if(years<=0){return;}
+  var bal=cur, contrib=cur; series=[bal];
+  for(var y=0;y<years;y++){
+    for(var k=0;k<12;k++){ bal=bal*(1+r/12)+m; contrib+=m; }
+    series.push(bal);
+  }
+  var growth=bal-contrib;
+  document.getElementById('bal').textContent=fmt(bal);
+  document.getElementById('contrib').textContent=fmt(contrib);
+  document.getElementById('growth').textContent=fmt(growth);
+  document.getElementById('yrs').textContent=years+' yrs';
+  document.getElementById('result').style.display='block';
+  drawChart();
+  pfSaveState(['age','retage','current','monthly','ret']);
+}
+function drawChart(){
+  var c=document.getElementById('chart'); if(!c||!series.length)return;
+  var dpr=window.devicePixelRatio||1, W=c.clientWidth||700, H=200;
+  c.width=W*dpr; c.height=H*dpr; var ctx=c.getContext('2d'); ctx.scale(dpr,dpr);
+  ctx.clearRect(0,0,W,H);
+  var max=Math.max.apply(null,series), pad=30;
+  var blue=getComputedStyle(document.documentElement).getPropertyValue('--pf-blue').trim()||'#1a5fb4';
+  // axis
+  ctx.strokeStyle='rgba(128,128,140,.3)'; ctx.beginPath(); ctx.moveTo(pad,H-20); ctx.lineTo(W-6,H-20); ctx.stroke();
+  // area
+  ctx.beginPath(); ctx.moveTo(pad,H-20);
+  series.forEach(function(v,i){ var x=pad+(W-pad-6)*i/(series.length-1), y=(H-20)-(H-40)*v/max; ctx.lineTo(x,y); });
+  ctx.lineTo(W-6,H-20); ctx.closePath(); ctx.fillStyle='rgba(26,95,180,.12)'; ctx.fill();
+  // line
+  ctx.beginPath();
+  series.forEach(function(v,i){ var x=pad+(W-pad-6)*i/(series.length-1), y=(H-20)-(H-40)*v/max; i?ctx.lineTo(x,y):ctx.moveTo(x,y); });
+  ctx.strokeStyle=blue; ctx.lineWidth=2.5; ctx.stroke();
+  ctx.fillStyle='#9a9ab0'; ctx.font='11px system-ui';
+  ctx.fillText('$'+Math.round(max/1000)+'k', 2, 14);
+  ctx.fillText('Year 0', pad, H-6); ctx.fillText('Year '+(series.length-1), W-58, H-6);
+}
+window.addEventListener('resize', function(){ if(series.length) drawChart(); });
+pfLoadState(['age','retage','current','monthly','ret']);
+pfRelated('/calculators/retirement-savings-calculator.html');
+calc();
+</script>
+</body>
+</html>

@@ -6,7 +6,8 @@
 <!-- ===== SEO 메타 (롱테일 키워드 타겟) ===== -->
 <title>Mortgage Calculator with Amortization Schedule (2026) — Free</title>
 <meta name="description" content="Free mortgage calculator with full amortization schedule. See your monthly payment, total interest, and payoff date. Includes extra-payment simulation.">
-<link rel="canonical" href="https://example.com/mortgage-calculator">
+<link rel="canonical" href="https://mpu00115-lgtm.github.io/calculators/mortgage-calculator.html">
+<link rel="stylesheet" href="/assets/site.css">
 <!-- ===== Open Graph ===== -->
 <meta property="og:title" content="Mortgage Calculator with Amortization Schedule">
 <meta property="og:description" content="Calculate your monthly mortgage payment and see the full amortization table.">
@@ -57,8 +58,10 @@
 </style>
 </head>
 <body>
+<header style="background:var(--pf-blue);color:#fff;padding:12px 16px"><div class="bar" style="max-width:820px;margin:0 auto;display:flex;justify-content:space-between;align-items:center"><span class="logo" style="font-weight:800">PlainFigures</span><nav><a href="/" style="color:#fff;text-decoration:none;font-size:.9rem;margin-left:14px">Home</a><a href="/guides/index.html" style="color:#fff;text-decoration:none;font-size:.9rem;margin-left:14px">Guides</a><a href="/about.html" style="color:#fff;text-decoration:none;font-size:.9rem;margin-left:14px">About</a></nav></div></header>
 <div class="wrap">
 
+  <p class="pf-crumb"><a href="/">Home</a> › <a href="/#calculators">Calculators</a> › Mortgage</p>
   <h1>Mortgage Calculator with Amortization Schedule</h1>
   <p class="sub">Estimate your monthly payment, total interest, and payoff date — and see how extra payments save you money.</p>
 
@@ -82,6 +85,11 @@
       <div class="row"><span>Total interest</span><b id="interest">$0</b></div>
       <div class="row"><span>Payoff time</span><b id="payoff">—</b></div>
       <div class="row" id="saveRow" style="display:none;color:#137333"><span>Saved by extra payments</span><b id="saved">$0</b></div>
+      <div class="pf-actions">
+        <button type="button" onclick="pfPrint()">🖨 Print / Save PDF</button>
+        <button type="button" onclick="pfShare()">🔗 Share result</button>
+      </div>
+      <div class="pf-copied">Link copied to clipboard ✓</div>
     </div>
   </div>
 
@@ -118,8 +126,10 @@
   </dl>
 
   <p class="disc"><strong>Disclaimer:</strong> This tool provides estimates for educational purposes only and is not financial advice. Actual loan terms, taxes, insurance, and fees vary by lender and location. Consult a licensed mortgage professional before making decisions.</p>
+  <div id="pf-related"></div>
 </div>
-
+<footer style="background:var(--pf-foot);color:#c8c8d4;padding:24px 16px;margin-top:40px"><div style="max-width:820px;margin:0 auto"><nav><a href="/about.html" style="color:#c8c8d4;margin-right:16px;text-decoration:none;font-size:.88rem">About</a><a href="/contact.html" style="color:#c8c8d4;margin-right:16px;text-decoration:none;font-size:.88rem">Contact</a><a href="/privacy.html" style="color:#c8c8d4;margin-right:16px;text-decoration:none;font-size:.88rem">Privacy</a><a href="/terms.html" style="color:#c8c8d4;margin-right:16px;text-decoration:none;font-size:.88rem">Terms</a></nav><p style="font-size:.8rem;color:#8a8a98;margin-top:12px">© 2026 PlainFigures. Estimates only; not financial advice.</p></div></footer>
+<script src="/assets/site.js"></script>
 <script>
 function fmt(n){return '$'+Math.round(n).toLocaleString('en-US');}
 function calc(){
@@ -155,7 +165,10 @@ function calc(){
   document.getElementById('result').style.display='block';
   document.getElementById('sched').innerHTML=rows;
   document.getElementById('schedWrap').style.display='block';
+  pfSaveState(['amount','rate','years','extra']);
 }
+pfLoadState(['amount','rate','years','extra']);
+pfRelated('/calculators/mortgage-calculator.html');
 calc(); // 첫 로드 시 기본값으로 결과 표시
 </script>
 </body>
