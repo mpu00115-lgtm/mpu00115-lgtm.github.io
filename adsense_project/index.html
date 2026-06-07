@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PlainFigures — Free Financial Calculators with Clear Explanations</title>
+<meta name="description" content="Free, accurate financial calculators — mortgage, auto loan, paycheck, credit card payoff, and retirement — each with a plain-English explanation of your results.">
+<link rel="canonical" href="https://mpu00115-lgtm.github.io/">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--pf-ink);line-height:1.6;background:var(--pf-bg)}
+  header{background:var(--pf-blue);color:#fff;padding:14px 16px}
+  header .bar{max-width:960px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+  header a{color:#fff;text-decoration:none;font-size:.92rem;margin-left:16px}
+  .logo{font-weight:800;font-size:1.15rem}
+  .hero{max-width:780px;margin:0 auto;padding:40px 16px 6px;text-align:center}
+  .hero h1{font-size:2rem;margin:.2em 0}
+  .hero p{color:var(--pf-muted);font-size:1.08rem}
+  .search{max-width:560px;margin:18px auto 0;padding:0 16px}
+  #q{width:100%;padding:13px 14px;border:1px solid #cfcfd8;border-radius:10px;font-size:1rem;background:#fff;color:inherit}
+  .grid{max-width:960px;margin:20px auto;padding:0 16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+  .tool{display:block;text-decoration:none;color:inherit;background:var(--pf-surface);border:1px solid var(--pf-line);border-radius:14px;padding:20px;transition:.15s}
+  .tool:hover{border-color:var(--pf-blue);transform:translateY(-2px)}
+  .tool h3{margin:.1em 0;color:var(--pf-blue)}
+  .tool p{margin:.3em 0 0;color:var(--pf-muted);font-size:.9rem}
+  .tag{display:inline-block;font-size:.7rem;font-weight:700;color:#fff;background:#1a8a4a;border-radius:5px;padding:1px 6px;margin-left:6px;vertical-align:middle}
+  .none{display:none;max-width:960px;margin:0 auto;padding:0 16px;color:var(--pf-muted)}
+  .intro{max-width:780px;margin:30px auto;padding:0 16px;color:var(--pf-ink)}
+  .ad{max-width:780px;margin:22px auto;padding:0 16px}
+  .ad>div{min-height:90px;background:#fafafe;border:1px dashed #c9c9d6;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#9a9ab0;font-size:.8rem}
+  a{color:var(--pf-blue)}
+  footer{background:var(--pf-foot);color:#c8c8d4;margin-top:50px;padding:30px 16px}
+  footer .f{max-width:960px;margin:0 auto}
+  footer a{color:#c8c8d4;margin-right:18px;text-decoration:none;font-size:.9rem}
+  footer a:hover{color:#fff}
+  .muted{color:#8a8a98;font-size:.82rem;margin-top:14px}
+</style>
+</head>
+<body>
+<header>
+  <div class="bar">
+    <span class="logo">PlainFigures</span>
+    <nav><a href="/glossary.html">Glossary</a><a href="/guides/index.html">Guides</a><a href="/about.html">About</a></nav>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Free Financial Calculators That Actually Explain the Math</h1>
+  <p>Fast, accurate answers for your biggest money decisions — and a plain-English explanation of what the numbers mean.</p>
+</section>
+
+<div class="search" id="calculators" style="scroll-margin-top:70px">
+  <input id="q" type="search" placeholder="Search calculators & guides…" oninput="filterTools()" aria-label="Search tools">
+</div>
+
+<!-- 도구 목록 (인터랙티브 가치신호 + 검색 필터) -->
+<div class="grid" id="grid">
+  <a class="tool" data-k="mortgage home loan payment amortization" href="/calculators/mortgage-calculator.html">
+    <h3>Mortgage Calculator</h3>
+    <p>Monthly payment, total interest, and full amortization schedule with extra-payment savings.</p>
+  </a>
+  <a class="tool" data-k="auto car loan vehicle payment" href="/calculators/auto-loan-calculator.html">
+    <h3>Auto Loan Calculator</h3>
+    <p>Car payment, total interest, and total cost — with down payment and trade-in.</p>
+  </a>
+  <a class="tool" data-k="paycheck salary take-home tax withholding net pay" href="/calculators/paycheck-calculator.html">
+    <h3>Paycheck Calculator<span class="tag">New</span></h3>
+    <p>Take-home pay after federal tax, FICA, state tax, and 401(k).</p>
+  </a>
+  <a class="tool" data-k="credit card debt payoff interest minimum" href="/calculators/credit-card-payoff-calculator.html">
+    <h3>Credit Card Payoff<span class="tag">New</span></h3>
+    <p>Months to debt-free and total interest — see what paying extra saves.</p>
+  </a>
+  <a class="tool" data-k="retirement savings 401k invest compound nest egg" href="/calculators/retirement-savings-calculator.html">
+    <h3>Retirement Savings<span class="tag">New</span></h3>
+    <p>Project your nest egg with a growth chart and compounding breakdown.</p>
+  </a>
+  <a class="tool" data-k="glossary terms definitions apr pmi escrow dictionary" href="/glossary.html">
+    <h3>Finance Glossary</h3>
+    <p>Plain-English definitions of APR, PMI, escrow, DTI and more.</p>
+  </a>
+  <a class="tool" data-k="guides articles explainers learn" href="/guides/index.html">
+    <h3>Money Guides</h3>
+    <p>Plain-English guides on mortgages, loans, and affordability.</p>
+  </a>
+  <a class="tool" data-k="request suggest contact" href="/contact.html">
+    <h3>Request a calculator</h3>
+    <p>New calculators are added regularly. Have a request? Let us know.</p>
+  </a>
+</div>
+<p class="none" id="none">No tools match your search.</p>
+
+<div class="ad"><div>[ AdSense — Display ]</div></div>
+
+<!-- 사이트 소개 콘텐츠(승인용 텍스트) -->
+<div class="intro">
+  <h2>Why PlainFigures?</h2>
+  <p>Financial decisions are easier when you can see the numbers clearly. Every calculator on this site is built on standard, documented formulas and tested for accuracy — but more importantly, each one comes with a plain-English explanation of how the result is calculated and why it matters. Whether you're comparing a 15-year and 30-year mortgage, working out your real take-home pay, planning a debt payoff, or projecting retirement savings, our tools give you a clear answer in seconds, plus the context to act on it.</p>
+  <p>Browse our <a href="/guides/index.html">guides</a> for deeper explanations, look up a term in the <a href="/glossary.html">glossary</a>, or jump straight into a calculator above. Everything is free, mobile-friendly, and runs right in your browser — the values you enter are never sent to our servers.</p>
+</div>
+
+<footer>
+  <div class="f">
+    <nav>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms of Service</a>
+      <a href="/glossary.html">Glossary</a>
+    </nav>
+    <p class="muted"><strong>Disclaimer:</strong> All tools provide estimates for educational purposes only and are not financial, legal, or tax advice. Consult a qualified professional before making decisions.</p>
+    <p class="muted">© 2026 PlainFigures. All rights reserved.</p>
+  </div>
+</footer>
+<script src="/assets/site.js"></script>
+<script>
+function filterTools(){
+  var q=document.getElementById('q').value.toLowerCase().trim();
+  var tools=document.querySelectorAll('#grid .tool'), shown=0;
+  tools.forEach(function(el){
+    var hit=!q || (el.getAttribute('data-k')+' '+el.textContent).toLowerCase().indexOf(q)>-1;
+    el.style.display=hit?'block':'none'; if(hit)shown++;
+  });
+  document.getElementById('none').style.display=shown?'none':'block';
+}
+</script>
+</body>
+</html>

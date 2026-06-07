@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Credit Card Payoff Calculator: Months to Debt-Free (2026) — Free</title>
+<meta name="description" content="Free credit card payoff calculator. Enter your balance, APR, and monthly payment to see how many months until debt-free and the total interest you'll pay.">
+<link rel="canonical" href="https://mpu00115-lgtm.github.io/calculators/credit-card-payoff-calculator.html">
+<link rel="stylesheet" href="/assets/site.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+ {"@type":"Question","name":"How long will it take to pay off my credit card?","acceptedAnswer":{"@type":"Answer","text":"It depends on your balance, APR, and monthly payment. A higher payment shortens the timeline and sharply reduces total interest because less is added each month."}},
+ {"@type":"Question","name":"Why does paying only the minimum cost so much?","acceptedAnswer":{"@type":"Answer","text":"Minimum payments barely exceed the monthly interest, so most of your money goes to interest and the balance shrinks slowly, stretching payoff over years."}}
+]}
+</script>
+<style>
+  *{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--pf-ink);line-height:1.7;background:var(--pf-bg)}
+  header{background:var(--pf-blue);color:#fff;padding:12px 16px}header .bar{max-width:760px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+  header a{color:#fff;text-decoration:none;font-size:.9rem;margin-left:14px}.logo{font-weight:800}
+  .wrap{max-width:760px;margin:0 auto;padding:14px 16px 60px}
+  h1{font-size:1.7rem;margin:.2em 0 .1em}.sub{color:var(--pf-muted);margin:0 0 18px}h2{font-size:1.25rem;margin:1.6em 0 .3em}
+  .card{background:var(--pf-surface);border:1px solid var(--pf-line);border-radius:14px;padding:20px;margin:18px 0}
+  label{display:block;font-weight:600;font-size:.92rem;margin:10px 0 4px}
+  input{width:100%;padding:11px 12px;border:1px solid #cfcfd8;border-radius:9px;font-size:1rem;background:#fff;color:inherit}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  button{margin-top:16px;width:100%;background:var(--pf-blue);color:#fff;border:0;border-radius:10px;padding:14px;font-size:1.05rem;font-weight:700;cursor:pointer}
+  .result{display:none;margin-top:18px}.big{font-size:2.1rem;font-weight:800;color:var(--pf-blue)}
+  .row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--pf-line)}
+  .warn{display:none;background:#fff4f4;border:1px solid #f0c0c0;color:#a23;border-radius:9px;padding:12px;margin-top:14px;font-size:.9rem}
+  .ad{margin:22px 0;min-height:90px;background:#fafafe;border:1px dashed #c9c9d6;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#9a9ab0;font-size:.8rem}
+  .faq dt{font-weight:700;margin-top:14px}.disc{font-size:.8rem;color:var(--pf-muted);border-top:1px solid var(--pf-line);margin-top:30px;padding-top:14px}a{color:var(--pf-blue)}
+  footer{background:var(--pf-foot);color:#c8c8d4;padding:24px 16px;margin-top:40px}footer .f{max-width:760px;margin:0 auto}footer a{color:#c8c8d4;margin-right:16px;text-decoration:none;font-size:.88rem}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="bar"><span class="logo">PlainFigures</span><nav><a href="/">Home</a><a href="/guides/index.html">Guides</a><a href="/about.html">About</a></nav></div></header>
+<div class="wrap">
+  <p class="pf-crumb"><a href="/">Home</a> › <a href="/#calculators">Calculators</a> › Credit Card Payoff</p>
+  <h1>Credit Card Payoff Calculator</h1>
+  <p class="sub">See how many months until you're debt-free — and how much interest a bigger payment saves.</p>
+  <div class="ad">[ AdSense — Above the fold ]</div>
+  <div class="card">
+    <div class="grid">
+      <div><label for="bal">Balance ($)</label><input id="bal" type="number" value="6000"></div>
+      <div><label for="apr">APR (%)</label><input id="apr" type="number" step="0.01" value="22"></div>
+      <div><label for="pay">Monthly payment ($)</label><input id="pay" type="number" value="250"></div>
+      <div><label for="extra">Extra per month ($)</label><input id="extra" type="number" value="0"></div>
+    </div>
+    <button onclick="calc()">Calculate payoff</button>
+    <div id="warn" class="warn">⚠ Your payment is too low to cover the monthly interest. The balance would grow, not shrink. Increase your payment to make progress.</div>
+    <div id="result" class="result">
+      <p style="margin:.4em 0 0">Time to pay off</p>
+      <div class="big" id="months">0</div>
+      <div class="row"><span>Total interest paid</span><b id="interest">$0</b></div>
+      <div class="row"><span>Total amount paid</span><b id="total">$0</b></div>
+      <div class="row"><span>Debt-free in</span><b id="years">0</b></div>
+      <div class="pf-actions">
+        <button type="button" onclick="pfPrint()">🖨 Print / Save PDF</button>
+        <button type="button" onclick="pfShare()">🔗 Share result</button>
+      </div>
+      <div class="pf-copied">Link copied to clipboard ✓</div>
+    </div>
+  </div>
+  <div class="ad">[ AdSense — In-content ]</div>
+  <h2>How credit card payoff works</h2>
+  <p>Each month, interest is charged on your remaining balance at your card's monthly rate (APR ÷ 12). Your payment first covers that interest, and only what's left chips away at the principal. That's why a balance that looks small can take years to clear: when the payment barely exceeds the interest, almost nothing reduces what you owe. The fastest way to break the cycle is to pay <strong>more than the minimum</strong> — every extra dollar goes straight to principal, which lowers next month's interest, which frees up even more of the following payment. The effect compounds in your favor.</p>
+  <p>Use the <strong>extra per month</strong> field to test this. Adding even $50 on top of your regular payment often cuts months off the timeline and saves hundreds in interest, because you're attacking the principal directly. The higher your APR, the more dramatic the savings from paying extra.</p>
+  <h2>Strategies to pay off faster</h2>
+  <p>Beyond paying extra, two proven methods help: the <em>avalanche</em> (pay the highest-APR card first to minimize total interest) and the <em>snowball</em> (pay the smallest balance first for quick motivating wins). A balance transfer to a 0% intro-APR card can also pause interest, but watch for transfer fees and the rate after the promo ends. For the underlying math, see our <a href="/guides/index.html">money guides</a>.</p>
+  <h2>Frequently asked questions</h2>
+  <dl class="faq">
+    <dt>How long will it take to pay off my credit card?</dt>
+    <dd>It depends on balance, APR, and payment. A higher monthly payment shortens the timeline and sharply cuts total interest.</dd>
+    <dt>Why does paying only the minimum cost so much?</dt>
+    <dd>Minimums barely exceed the interest, so the balance shrinks slowly and you pay interest for years.</dd>
+  </dl>
+  <p class="disc"><strong>Disclaimer:</strong> Estimates for educational purposes only, not financial advice. Assumes a fixed APR and no new charges. Real cards may compound daily and charge fees.</p>
+  <div id="pf-related"></div>
+</div>
+<footer><div class="f"><nav><a href="/about.html">About</a><a href="/contact.html">Contact</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></nav><p style="font-size:.8rem;color:#8a8a98;margin-top:12px">© 2026 PlainFigures. Estimates only; not financial advice.</p></div></footer>
+<script src="/assets/site.js"></script>
+<script>
+function fmt(n){return '$'+Math.round(n).toLocaleString('en-US');}
+function calc(){
+  var bal=+document.getElementById('bal').value,
+      apr=+document.getElementById('apr').value,
+      pay=(+document.getElementById('pay').value||0)+(+document.getElementById('extra').value||0);
+  if(!bal||!pay){return;}
+  var r=apr/100/12;
+  var firstInterest=bal*r;
+  var warn=document.getElementById('warn');
+  if(pay<=firstInterest){ warn.style.display='block'; document.getElementById('result').style.display='none'; return; }
+  warn.style.display='none';
+  var b=bal, months=0, interest=0;
+  while(b>0 && months<1200){
+    var i=b*r; interest+=i; b=b+i-pay; months++;
+    if(b<0){ interest+=b<0?0:0; b=0; }
+  }
+  var total=bal+interest;
+  document.getElementById('months').textContent=months+' mo';
+  document.getElementById('interest').textContent=fmt(interest);
+  document.getElementById('total').textContent=fmt(total);
+  document.getElementById('years').textContent=(Math.floor(months/12))+'y '+(months%12)+'m';
+  document.getElementById('result').style.display='block';
+  pfSaveState(['bal','apr','pay','extra']);
+}
+pfLoadState(['bal','apr','pay','extra']);
+pfRelated('/calculators/credit-card-payoff-calculator.html');
+calc();
+</script>
+</body>
+</html>
