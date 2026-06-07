@@ -1,0 +1,6 @@
+# ads.txt — Authorized Digital Sellers
+# 애드센스 승인 후, 아래 줄의 pub-XXXX를 본인 퍼블리셔 ID로 교체하세요.
+# (AdSense 계정 > 계정 > 설정 > 계정 정보에서 publisher ID 확인)
+# 사이트 루트(https://yourdomain.com/ads.txt)에 위치해야 합니다.
+
+google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0

@@ -1,0 +1,36 @@
+# Netlify 배포 설정 — adsense_project
+# 이 폴더를 netlify.com에 드래그&드롭하면 바로 라이브됩니다.
+
+[build]
+  # 정적 사이트라 빌드 명령 불필요. 이 폴더 자체가 게시 대상.
+  publish = "."
+
+# 깨끗한 URL: /about → about.html 자동 처리
+[[redirects]]
+  from = "/about"
+  to = "/about.html"
+  status = 200
+[[redirects]]
+  from = "/contact"
+  to = "/contact.html"
+  status = 200
+[[redirects]]
+  from = "/privacy"
+  to = "/privacy.html"
+  status = 200
+[[redirects]]
+  from = "/terms"
+  to = "/terms.html"
+  status = 200
+[[redirects]]
+  from = "/guides"
+  to = "/guides/"
+  status = 200
+
+# 보안·신뢰 헤더 (애드센스 심사·SEO에 유리)
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
